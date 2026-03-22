@@ -86,13 +86,6 @@ export default function Header() {
         {menuOpen && (
           <div className="md:hidden border-t border-border bg-white px-6 pb-5 pt-3">
             <nav className="flex flex-col">
-              <Link
-                href="/"
-                onClick={() => setMenuOpen(false)}
-                className={`py-3 text-sm font-medium border-b border-border transition-colors duration-150 ${pathname === '/' ? 'text-blue-600' : 'text-body hover:text-ink'}`}
-              >
-                Home
-              </Link>
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
@@ -109,7 +102,7 @@ export default function Header() {
             <div className="flex flex-col gap-3 pt-4">
               <a
                 href={`tel:${PHONE.replace(/\D/g, '')}`}
-                className="flex items-center gap-2 text-sm font-semibold text-teal-600"
+                className="flex items-center justify-center gap-2 text-sm font-semibold text-blue-600"
               >
                 <Phone size={14} strokeWidth={2} />
                 {PHONE}

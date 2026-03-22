@@ -56,7 +56,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row gap-3">
             <a
               href={`tel:${PHONE.replace(/\D/g, '')}`}
-              className="inline-flex items-center gap-2 bg-white text-ink font-semibold px-6 py-2.5 rounded-lg text-sm
+              className="inline-flex items-center justify-center gap-2 bg-white text-ink font-semibold px-6 py-2.5 rounded-lg text-sm
                          shadow-btn hover:bg-white/90 hover:shadow-[0_4px_14px_rgba(0,0,0,0.2)] transition-all duration-150"
             >
               <Phone size={14} strokeWidth={1.75} />
