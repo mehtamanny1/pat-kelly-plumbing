@@ -1,101 +1,177 @@
-import Image from "next/image";
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { Phone, ArrowRight, ShieldCheck, Clock, MapPin } from 'lucide-react'
+import { buildMetadata } from '@/lib/metadata'
+import { services } from '@/data/services'
+import { serviceAreas } from '@/data/serviceAreas'
+import CTABanner from '@/components/CTABanner'
+import Testimonials from '@/components/Testimonials'
+import ServiceCard from '@/components/ServiceCard'
+import LocalBusinessSchema from '@/components/LocalBusinessSchema'
 
-export default function Home() {
+export const metadata: Metadata = buildMetadata({
+  title: 'Cincinnati Plumber — Same-Day Residential Service',
+  description: 'Pat Kelly Plumbing Co offers licensed, insured residential plumbing in Greater Cincinnati. Drain cleaning, water heaters, leak repair, and emergency service. Call today.',
+  path: '/',
+})
+
+const PHONE = process.env.NEXT_PUBLIC_PHONE || '513-555-0100'
+
+export default function HomePage() {
+  const featuredServices = services.slice(0, 6)
+  const allCities = serviceAreas.flatMap((z) => z.cities).slice(0, 8)
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <LocalBusinessSchema />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Hero */}
+      <section
+        className="relative overflow-hidden border-b border-blue-800"
+        style={{ background: 'linear-gradient(135deg, #1D4ED8 0%, #1e3a8a 100%)' }}
+      >
+        {/* Decorative circle — top right */}
+        <div
+          aria-hidden
+          className="absolute -top-20 -right-20 w-96 h-96 rounded-full pointer-events-none opacity-20"
+          style={{ background: 'radial-gradient(circle, #BFDBFE 0%, transparent 70%)' }}
+        />
+        {/* Decorative circle — bottom left */}
+        <div
+          aria-hidden
+          className="absolute -bottom-16 -left-16 w-72 h-72 rounded-full pointer-events-none opacity-15"
+          style={{ background: 'radial-gradient(circle, #99F6E4 0%, transparent 70%)' }}
+        />
+
+        <div className="relative max-w-6xl mx-auto px-6 py-16 md:py-20">
+          <p className="text-xs font-semibold uppercase tracking-widest text-blue-200 mb-5">Greater Cincinnati, Ohio</p>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.08] text-white mb-6 max-w-3xl">
+            Residential plumbing,<br className="hidden sm:block" /> done right.
+          </h1>
+          <p className="text-lg text-blue-100 leading-relaxed mb-10 max-w-xl">
+            Pat Kelly Plumbing handles residential plumbing across Greater Cincinnati — from routine repairs to emergency service. Licensed, insured, and on time.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-3">
+            <a
+              href={`tel:${PHONE.replace(/\D/g, '')}`}
+              className="inline-flex items-center gap-2 bg-white text-ink font-semibold px-6 py-2.5 rounded-lg text-sm
+                         shadow-btn hover:bg-white/90 hover:shadow-[0_4px_14px_rgba(0,0,0,0.2)] transition-all duration-150"
+            >
+              <Phone size={14} strokeWidth={1.75} />
+              {PHONE}
+            </a>
+            <Link href="/quote" className="btn-ghost-dark">
+              Request a Quote
+              <ArrowRight size={14} strokeWidth={1.75} />
+            </Link>
+          </div>
+
+          {/* Trust bar */}
+          <div className="flex flex-wrap gap-6 mt-12 pt-10 border-t border-blue-600">
+            {[
+              { icon: ShieldCheck, label: 'Licensed & Insured' },
+              { icon: Clock, label: 'Same-Day Service' },
+              { icon: MapPin, label: 'Greater Cincinnati' },
+            ].map(({ icon: Icon, label }) => (
+              <div key={label} className="flex items-center gap-2">
+                <Icon size={13} strokeWidth={1.75} className="text-blue-300" />
+                <span className="text-xs text-blue-200 font-medium">{label}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </section>
+
+      {/* Services Snapshot */}
+      <section className="bg-white border-b border-border">
+        <div className="max-w-6xl mx-auto px-6 py-20">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+            <div>
+              <p className="eyebrow mb-3">Services</p>
+              <h2 className="section-heading">What We Handle</h2>
+            </div>
+            <Link
+              href="/services"
+              className="text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-1.5 shrink-0"
+            >
+              View all services <ArrowRight size={13} strokeWidth={2} />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {featuredServices.map((service) => (
+              <ServiceCard
+                key={service.id}
+                title={service.title}
+                description={service.shortDescription}
+                icon={service.icon}
+                serviceId={service.id}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Pat — subtle blue tint */}
+      <section className="bg-surface-blue/30 border-b border-blue-100/60">
+        <div className="max-w-6xl mx-auto px-6 py-20">
+          <div className="mb-12">
+            <p className="eyebrow mb-3">Why Pat Kelly</p>
+            <h2 className="section-heading">Built on Trust</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {[
+              { title: 'Licensed & Insured', desc: 'Fully licensed and insured in Ohio. Every job is covered — no corners cut.' },
+              { title: 'Local & Family-Owned', desc: 'A Cincinnati business serving Cincinnati neighbors — not a franchise or call center.' },
+              { title: 'Guaranteed Work', desc: 'We stand behind every repair and installation. If something is not right, we make it right.' },
+            ].map((item) => (
+              <div key={item.title}>
+                <div
+                  className="w-8 h-[3px] rounded-full mb-5"
+                  style={{ background: 'linear-gradient(90deg, #2563EB, #60A5FA)' }}
+                />
+                <h3 className="text-base font-semibold text-ink mb-2">{item.title}</h3>
+                <p className="text-sm text-body leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <Testimonials limit={3} />
+
+      {/* Service Area Callout */}
+      <section className="bg-white border-b border-border">
+        <div className="max-w-6xl mx-auto px-6 py-20">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+            <div>
+              <p className="eyebrow mb-3">Coverage</p>
+              <h2 className="section-heading">Serving Greater Cincinnati</h2>
+            </div>
+            <Link
+              href="/service-area"
+              className="text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-1.5 shrink-0"
+            >
+              See full service area <ArrowRight size={13} strokeWidth={2} />
+            </Link>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {allCities.map((city) => (
+              <span
+                key={city}
+                className="text-sm font-medium text-body bg-surface-muted px-3 py-1.5 rounded-lg border border-border hover:border-blue-200 hover:text-blue-600 transition-colors duration-150"
+              >
+                {city}
+              </span>
+            ))}
+            <span className="text-sm text-muted self-center ml-1">and more</span>
+          </div>
+        </div>
+      </section>
+
+      <CTABanner heading="Ready to Get Started?" subheading="Call us today or submit a quote request — we respond fast." />
+    </>
+  )
 }
