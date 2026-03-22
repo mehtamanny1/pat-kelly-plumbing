@@ -67,7 +67,7 @@
 
   /* Section heading */
   .section-heading {
-    @apply text-3xl font-semibold tracking-tight text-ink;
+    @apply text-2xl md:text-3xl font-semibold tracking-tight text-ink;
   }
 
   /* Blue icon container */

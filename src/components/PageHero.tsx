@@ -25,7 +25,7 @@ export default function PageHero({ eyebrow, title, subtitle, children }: PageHer
 
       <div className="relative max-w-6xl mx-auto px-6 py-16 md:py-20">
         <p className="text-xs font-semibold uppercase tracking-widest text-blue-200 mb-4">{eyebrow}</p>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4 max-w-3xl leading-tight">
+        <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4 max-w-3xl leading-tight">
           {title}
         </h1>
         {subtitle && (

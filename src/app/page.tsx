@@ -45,7 +45,7 @@ export default function HomePage() {
 
         <div className="relative max-w-6xl mx-auto px-6 py-16 md:py-20">
           <p className="text-xs font-semibold uppercase tracking-widest text-blue-200 mb-5">Greater Cincinnati, Ohio</p>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.08] text-white mb-6 max-w-3xl">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] text-white mb-6 max-w-3xl">
             Residential plumbing,<br className="hidden sm:block" /> done right.
           </h1>
           <p className="text-lg text-blue-100 leading-relaxed mb-10 max-w-xl">

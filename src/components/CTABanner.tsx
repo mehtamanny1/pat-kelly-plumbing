@@ -29,7 +29,7 @@ export default function CTABanner({
 
       <div className="relative max-w-6xl mx-auto px-6 py-20">
         <div className="max-w-2xl">
-          <h2 className="text-3xl font-semibold tracking-tight text-white mb-3">{heading}</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white mb-3">{heading}</h2>
           <p className="text-white/45 text-lg mb-8">{subheading}</p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
